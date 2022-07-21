@@ -1,16 +1,19 @@
 package com.example.recyclerview07062022;
 
+/**
+ * Created by pphat on 7/19/2022.
+ */
 public enum ServiceKind {
-    RESTAURANT ("Nhà hàng"),
-    FAMILY ("Gia đình"),
-    GROUP ("Hội nhóm"),
+    RESTAURANT ("Nhà hàng"),
+    FAMILY ("Gia đình"),
+    GROUP ("Hội nhóm"),
     BUFFET ("Buffet"),
-    SHOP_ONLILE ("Shop online"),
-    STREET ("Vỉa hè");
+    SHOP_ONLINE ("Shop online"),
+    STREET ("Vỉa hè");
 
     private final String name;
 
-    serviceKind(String s) {
+    ServiceKind(String s) {
         name = s;
     }
 
