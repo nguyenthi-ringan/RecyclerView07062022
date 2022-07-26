@@ -99,20 +99,24 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
             hourCurrent = calendar.get(Calendar.HOUR_OF_DAY);
             minutesCurrent = calendar.get(Calendar.MINUTE);
 
-            // 7:00 -> 21:00
-            // 8: 03
-            if (!checkCurrentTimeOver(food.getHourOpenTime(), hourCurrent, food.getHourCloseTime())) {
-                if (!checkCurrentTimeOver(food.getMinutesOpenTime(), minutesCurrent, food.getMinutesCloseTime())) {
-                    tvCloseTime.setVisibility(View.GONE);
-                }
+            int timeOpen = convertTimeToMinus(food.getHourOpenTime(), food.getMinutesOpenTime());
+            int timeClose = convertTimeToMinus(food.getHourCloseTime(), food.getMinutesCloseTime());
+            int timeCurrent = convertTimeToMinus(hourCurrent, minutesCurrent);
+
+            if (!checkCurrentTimeOver(timeOpen, timeCurrent, timeClose)) {
+                tvCloseTime.setVisibility(View.GONE);
             } else {
                 tvCloseTime.setVisibility(View.VISIBLE);
             }
         }
     }
 
-    private boolean checkCurrentTimeOver(int timeOpen, int timeCurrent, int timeClose) {
-        return timeCurrent >= timeClose && timeCurrent < timeOpen;
+    private int convertTimeToMinus(int hour, int minutes) {
+        return hour * 60 + minutes;
+    }
+
+        private boolean checkCurrentTimeOver(int timeOpen, int timeCurrent, int timeClose) {
+            return timeCurrent >= timeClose || timeCurrent < timeOpen;
     }
 
 }
